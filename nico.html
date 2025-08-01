@@ -8,36 +8,175 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
     </style>
+    <style>
+      .img-box img {
+        object-fit: cover;
+      }
+    </style>
+    <script>
+      // Estados de las propiedades
+      let direction = 'flex-row';
+      let justify = 'justify-center';
+      let align = 'items-center';
+
+      const RESET_DELAY = 2000;
+      let resetTimeout = null;
+
+      function updateFlexbox() {
+        const flexInner = document.getElementById("flex-inner");
+        flexInner.className = `flex ${direction} ${justify} ${align} gap-4 w-full h-full transition-all duration-500`;
+      }
+
+      function setDirection(value) {
+        direction = value;
+        updateFlexbox();
+        autoReset();
+      }
+
+      function setJustify(value) {
+        justify = value;
+        updateFlexbox();
+        autoReset();
+      }
+
+      function setAlign(value) {
+        align = value;
+        updateFlexbox();
+        autoReset();
+      }
+
+      function autoReset() {
+        clearTimeout(resetTimeout);
+        resetTimeout = setTimeout(() => {
+          direction = 'flex-row';
+          justify = 'justify-center';
+          align = 'items-center';
+          updateFlexbox();
+        }, RESET_DELAY);
+      }
+    </script>
 </head>
 
-<body>
-  <div class="bg-blue-500 text-center p-8 rounded">
-    <h1 class="text-7xl font-bold">FLEX-BOX</h1>
-    <p class="text-2xl font-bold underline">Diseño de Layout</p>
+<body style="background-color: #111" class="max-w-screen-auto mx-auto ">
+  <div class="text-center p-8 rounded" style="background-color: #212121;" >
+    <img src="flexbox.PNG" class="mx-auto w-95 h-60">
+    <h1 class="text-7xl font-bold text-white">FLEXBOX</h1>
+    <p class="text-2xl font-bold underline text-white font-mono">Diseño de Layout</p>
   </div>
   <br>
+  <!--Cuadro que es-->
+  <div class="w-full">
+    <div class="w-3/6 rounded-lg bg-gray-50 overflow-hidden break-words mx-auto p-6">
+      <h2 class=" font-bold mb-4 text-base sm:text-sm md:text-3xl text-center"><p class="font-mono">¿Que es?</p></h2>
+      <p class="text-base sm:text-sm md:text-xl mb-4">Es un modelo de diseño CSS que proporciona una forma eficiente de distribuir elementos dentro de un contenedor y alinearlos de manera dinámica.</p>
+      <img src="flexboxcss.jpg" class="mx-auto w-2/4 rounded-lg">
+    </div>
+  </div>
+  <!--Cuadro estructura Basica-->
+  <div class="container mx-auto p-5">
+    <div class="flex items-start space-x-6 w-full">
+      <div class="w-3/6 h-70 p-6 rounded-lg shadow-xl bg-gray-50 overflow-hidden break-words rounded-lg">
+        <h2 class=" font-bold mb-3 text-base sm:text-sm md:text-3xl"><p class="font-mono">Estructura Basica</p></h2>
+        <p class=" mb-4 text-base sm:text-sm md:text-xl ">Para utilizar Flexbox, necesitas <a class="underline decoration-blue-500">display: flex </a>en el contenedor padre. Los elementos dentro del contenedor se alinearán en una fila de manera predeterminada.</p>
+        <div class="">
+          <img src="estructura.png" class="rounded-lg object-cover w-full" />
+        </div>
+      </div>
+      <div class=" w-3/7 ml-8 shadow-xl">
+        <img src="codigo_contenedor.png" class="rounded-lg object-cover w-full" />
+      </div>
+    </div>
+  </div>
+  <!--Cuadro Flex-Direction-->
   <div class="container mx-auto p-6">
     <div class="flex items-start space-x-6">
-      <div class="w-200 h-70 p-6 rounded-lg shadow-lg ml-2">
-        <h2 class="text-4xl font-bold mb-3">¿Que es?</h2>
-        <p class="text-3xl">Es un <a class="underline decoration-sky-500"> diseño unidimensional en CSS </a> que permite distribuir el espacio entre los elementos de un contenedor y alinear sus contenidos de manera eficiente.</p>
+      <div class="w-1/3 h-90 p-6 rounded-lg shadow-xl bg-gray-50 overflow-hidden break-words ">
+        <h2 class="text-3xl font-bold mb-4 text-center "><p class="font-mono">Flex-direction</p></h2>
+        <p class="mb-4 text-base sm:text-sm md:text-xl">Esta propiedad define el eje principal sobre el cual se alinearán los elementos, Se alinean en una fila horizontal <a class="underline decoration-blue-500">(row)</a> y tambien aliniarze en columnas <a class="underline decoration-blue-500">(column)</a>.</p>
+        <br>
+        <img src="direccion_flex.png" class="rounded-lg object-cover w-full">
       </div>
-      <div class="w-140 h-68 ml-14">
-        <img src="flex.png" alt="Imagen de ejemplo" class="rounded-lg object-cover w-222 h-70" />
+      <!--Cuadro Justify-Content-->
+      <div class="w-1/3 h-90 p-6 rounded-lg shadow-xl ml-2 bg-gray-50 overflow-hidden break-words">
+        <h2 class="text-3xl font-bold mb-4 text-center "><p class="font-mono">Justify-content</p></h2>
+        <p class="mb-3 text-base sm:text-sm md:text-xl">Es la que Controla cómo se distribuyen los elementos a lo largo del eje principal. <a class="underline decoration-blue-500">Centrar, distribuir uniformemente y aliniear.</a> También controla la alineación de los elementos cuando desbordan la línea.</p>
+        <img src="justify_flex.png" class="rounded-lg object-cover w-full">
+      </div>
+      <!--Cuadro Aling-Items-->
+      <div class="w-1/3 h-90  p-6 rounded-lg shadow-xl ml-2 bg-gray-50 overflow-hidden break-words">
+        <h2 class="text-3xl font-bold mb-4 text-center"><p class="font-mono">Aling-items</p></h2>
+        <p class="mb-3 text-base sm:text-sm md:text-xl">Esta propiedad controla la alineación de los elementos a lo largo del eje transversal (perpendicular al eje principal), alinea los elementos al inicio, centro o final del contenedor.</p>
+        <img src="aling_flex.png" class="rounded-lg object-cover w-full">
       </div>
     </div>
   </div>
   <div class="container mx-auto p-6">
-    <div class="flex items-start space-x-6">
-      <div class="w-200 h-70 p-6 rounded-lg shadow-lg">
-        <h2 class="text-3xl font-bold mb-4">Estructura Basica</h2>
-        <p class="text-2xl">Para utilizar Flexbox, necesitas <a class="underline decoration-blue-500">display: flex </a>en el contenedor padre. Los elementos dentro del contenedor se alinearán en una fila de manera predeterminada.</p>
-        <div>
-          <img src="estructura.png" class="rounded-lg object-cover w-auto h-14" />
+    <div class="flex items-start space-x-6 w-full">
+      <div class="w-1/4 h-130 p-6 rounded-lg shadow-xl bg-gray-50 overflow-hidden break-words">
+        <h2 class="text-2xl font-bold mb-3 sm:text-sm md:text-2xl font-mono">Flex-Box interactivo</h2>
+        <!--boton de Flex-direction-->
+        <button onclick="toggleList('list1')" class="w-full border border-blue-500 text-blue-700 font-semibold py-2 px-4 rounded hover:bg-blue-50 transition">
+          Flex-Direction ▼
+        </button>
+        <ul id="list1" class="hidden mt-2 bg-white border rounded shadow p-2 space-y-1">
+          <li><a onclick="setDirection('flex-row')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Flex-Direction: Row</a></li>
+          <li><a onclick="setDirection('flex-row-reverse')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Flex-Direction: Row-Reverse</a></li>
+          <li><a onclick="setDirection('flex-col')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Flex-Direction: Column</a></li>
+          <li><a onclick="setDirection('flex-col-reverse')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Flex-Direction: Column-Reverse</a></li>
+        </ul>
+      <!--boton de justify-content-->
+        <div class="relative">
+          <button onclick="toggleList('list2')" class="w-full border border-green-500 text-green-700 font-semibold py-2 px-4 rounded hover:bg-green-50 transition">
+            Justify-content ▼
+          </button>
+          <ul id="list2" class="hidden mt-2 bg-white border rounded shadow p-2 space-y-1 mb-4">
+            <li><a onclick="setJustify('justify-start')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Justify-content: flex-start</a></li>
+            <li><a onclick="setJustify('justify-center')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Justify-content: center</a></li>
+            <li><a onclick="setJustify('justify-end')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Justify-content: flex-end</a></li>
+            <li><a onclick="setJustify('justify-evenly')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Justify-content: space-evenly</a></li>
+            <li><a onclick="setJustify('justify-around')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Justify-content: space-around</a></li>
+            <li><a onclick="setJustify('justify-between')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Justify-content: space-between</a></li>
+          </ul>
+        </div>
+      <!--boton de Aling-items-->
+        <div class="relative">
+          <button onclick="toggleList('list3')" class="w-full border border-purple-500 text-purple-700 font-semibold py-2 px-4 rounded hover:bg-purple-50 transition">
+            Aling-Items ▼
+          </button>
+          <ul id="list3" class="hidden mt-2 bg-white border rounded shadow p-2 space-y-1">
+            <li><a onclick="setAlign('items-stretch')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Aling-Items: stretch</a></li>
+            <li><a onclick="setAlign('items-start')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Aling-Items: flex-start</a></li>
+            <li><a onclick="setAlign('items-end')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Aling-Items: flex-end</a></li>
+            <li><a onclick="setAlign('items-center')" class="block px-2 py-1 hover:bg-gray-100 text-sm">Aling-Items: center</a></li>
+          </ul>
+        </div>
+        <script>
+          function toggleList(id) {
+            ['list1', 'list2', 'list3'].forEach(list => {
+            if (list !== id) document.getElementById(list).classList.add('hidden');
+          });
+            const list = document.getElementById(id);
+            list.classList.toggle('hidden');
+          }
+        </script>
+      </div>
+      <div class="img-box bg-gray-50 p-6 rounded-lg shadow-md w-full h-130">
+        <div id="flex-inner" class="flex flex-row justify-center items-center gap-4 w-full h-full transition-all duration-500">
+          <img src="azul.png" alt="Imagen 1" class="w-30 h-30 rounded shadow-md">
+          <img src="verde.jpg" alt="Imagen 2" class="w-30 h-30 rounded shadow-md">
+          <img src="morado.png" alt="Imagen 3" class="w-30 h-30 rounded shadow-md">
         </div>
       </div>
-      <div class="ml-7">
-        <img src="contenedor.png" class="rounded-lg object-cover w-150" />
+    </div>
+  <div class="container mx-auto p-6">
+    <div class="flex items-end space-x-6 w-full">
+      <div class="w-3/6 h-auto p-6 rounded-lg shadow-xl bg-gray-50 overflow-hidden break-words ">
+        <h2 class="font-bold mb-4 text-base sm:text-sm md:text-3xl text-center"><p class="font-mono">Flexbox vs Grid</p></h2>
+        <p class=" mb-4 text-base sm:text-sm md:text-xl">La principal diferencia entre CSS Grid y Flexbox es que con Grid puedes ubicar elementos en dos dimensiones, columnas y filas al tiempo, mientras que con Flexbox solo puedes manejar una dimensión, tienes que elegir entre filas y columnas.</p>
+        <img src="gridflex.png" class="w-4/7 mx-auto">
+      </div>
+      <div class="w-1/2 ml-15 shadow-xl">
+        <img src="Flexvsgrid.png" class="rounded-lg object-cover w-full h-full"/>
       </div>
     </div>
   </div>
